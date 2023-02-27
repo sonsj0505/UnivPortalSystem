@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sonsj.UnivPortalSystem.domain.student;
 import sonsj.UnivPortalSystem.dto.studentRequiredInfoDto;
 import sonsj.UnivPortalSystem.service.studentService;
 
@@ -12,7 +11,7 @@ import sonsj.UnivPortalSystem.service.studentService;
 @RequiredArgsConstructor
 public class studentController {
 
-    private studentService studentService;
+    private final studentService studentService;
 
     @GetMapping("studentJoin")
     public String studentJoin(Model model, studentRequiredInfoDto requestDtoData){
@@ -25,14 +24,15 @@ public class studentController {
     @PostMapping("studentJoin")
     public String studentJoinComplete(@ModelAttribute("requestDtoData") studentRequiredInfoDto data, Model model) {
 
-        //model.addAttribute("id", data.getId());
+        //입력한 값 view로 넘김
         model.addAttribute("studentNumber", data.getStudentNumber());
         model.addAttribute("name", data.getName());
         model.addAttribute("email", data.getEmail());
 
         // 입력한 값을 db에 저장
-        //studentService.studentJoinComplete(data.toEntity);
+        studentService.studentJoinComplete(data.toEntity());
 
         return "student/studentJoin";
     }
+
 }

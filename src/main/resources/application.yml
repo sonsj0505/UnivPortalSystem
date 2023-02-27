@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver # MySql Driver
     url: jdbc:mysql://localhost:3306/UnivPortalSystem?serverTimezone=UTC&characterEncoding=UTF-8 # DB Source URL
     username: root # DB username
-    password: 1234 # DB password
+    password:  # DB password
   jpa:
     show-sql: true
     hibernate:
