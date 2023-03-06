@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>studentInfo</title>
+</head>
+<body>
+학생 정보 출력
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>학번</th>
+                    <th>이름</th>
+                    <th>e-mail</th>
+                    <th>학과</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${studentNumber}"></td>
+                    <td th:text="${name}"></td>
+                    <td th:text="${email}"></td>
+                    <th>학과 정보!!!!!!!!!!</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+수강 과목 리스트 노출
+ -> 수강 과목 없을시 수강 신청 버튼 노출 (버튼 클릭시 수강 신청 페이지 이동)
+    <div>
+
+    </div>
+</body>
+</html>

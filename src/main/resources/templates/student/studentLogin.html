@@ -2,17 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>studentJoin</title>
+        <title>studentLogin</title>
     </head>
     <body>
-        <div>
-            <form th:action="@{/student/join}" th:object="${requestDtoData}" method="post">
+        <div id = "studentLoginForm">
+            <form th:action="@{/student/login}" th:object="${requestDtoData}" method="post">
                 <div>학번 : <input type="text" th:field="*{studentNumber}"/></div>
                 <div>비밀번호 : <input type="text" th:field="*{password}"/></div>
-                <div>이름 : <input type="text" th:field="*{name}"/></div>
-                <div>이메일 : <input type="text" th:field="*{email}"/></div>
-                <button type="submit">등록</button></br></br>
+                <button type="submit" >로그인</button></br>
             </form>
+            <a th:href="@{/student/join}">회원가입</a>
         </div>
     </body>
 </html>

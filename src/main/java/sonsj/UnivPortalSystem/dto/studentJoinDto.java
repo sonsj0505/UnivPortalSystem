@@ -8,17 +8,19 @@ import sonsj.UnivPortalSystem.domain.student;
 
 @Getter @Setter
 @RequiredArgsConstructor
-public class studentRequiredInfoDto {
+public class studentJoinDto {
 
     private Long id;
     private Long studentNumber;
+    private String password;
     private String name;
     private String email;
 
     @Builder
-    public studentRequiredInfoDto(Long id, Long studentNumber, String name, String email) {
+    public studentJoinDto(Long id, Long studentNumber, String password, String name, String email) {
         this.id = id;
         this.studentNumber = studentNumber;
+        this.password = password;
         this.name = name;
         this.email = email;
     }
@@ -26,6 +28,7 @@ public class studentRequiredInfoDto {
     public student toEntity(){
         return student.studentJoinBuilder()
                 .studentNumber(this.studentNumber)
+                .password(this.password)
                 .name(this.name)
                 .email(this.email)
                 .build();

@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sonsj.UnivPortalSystem.dto.studentRequiredInfoDto;
+import sonsj.UnivPortalSystem.domain.student;
+import sonsj.UnivPortalSystem.dto.studenetLoginDto;
+import sonsj.UnivPortalSystem.dto.studentJoinDto;
 import sonsj.UnivPortalSystem.service.studentService;
 
 @Controller
@@ -13,26 +15,51 @@ public class studentController {
 
     private final studentService studentService;
 
-    @GetMapping("studentJoin")
-    public String studentJoin(Model model, studentRequiredInfoDto requestDtoData){
+    @GetMapping("/student/login")
+    public String studentLogin(Model model, studenetLoginDto dtoData) {
+
+        //studenetLoginInfoDto에 입력 값을 받음
+        model.addAttribute("requestDtoData", dtoData);
+
+        return "student/studentLogin";
+    }
+
+    @PostMapping("/student/login")
+    public String studentLoginComplete(@ModelAttribute("requestDtoData") studenetLoginDto dtoData, Model model) {
+
+        student studentData = dtoData.toEntity();
+
+        studentService.studentLogin(studentData);
+
+        return "redirect:/student/info/"+studentData.getStudentNumber();
+    }
+
+    @GetMapping("/student/info/{studentNumber}")
+    public String studentInfo(@PathVariable Long studentNumber, Model model) {
+
+        student studentData = studentService.studentInfo(studentNumber);
+
+        model.addAttribute("name", studentData.getName());
+        model.addAttribute("email", studentData.getEmail());
+
+        return "student/studentInfo";
+    }
+
+    @GetMapping("/student/join")
+    public String studentJoin(Model model, studentJoinDto requestDtoData){
 
         // 입력할 값을 dto로 보냄
         model.addAttribute("requestDtoData", requestDtoData);
         return "student/studentJoin";
     }
 
-    @PostMapping("studentJoin")
-    public String studentJoinComplete(@ModelAttribute("requestDtoData") studentRequiredInfoDto data, Model model) {
-
-        //입력한 값 view로 넘김
-        model.addAttribute("studentNumber", data.getStudentNumber());
-        model.addAttribute("name", data.getName());
-        model.addAttribute("email", data.getEmail());
+    @PostMapping("/student/join")
+    public String studentJoinComplete(@ModelAttribute("requestDtoData") studentJoinDto data) {
 
         // 입력한 값을 db에 저장
         studentService.studentJoinComplete(data.toEntity());
 
-        return "student/studentJoin";
+        return "redirect:/student/login";
     }
 
 }

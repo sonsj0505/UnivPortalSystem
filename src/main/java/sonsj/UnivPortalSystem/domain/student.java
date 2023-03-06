@@ -1,9 +1,6 @@
 package sonsj.UnivPortalSystem.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -19,7 +16,10 @@ public class student {
     private Long id;
 
     @Column(name = "studentNumber", nullable = false)
-    private Long studentNumber;
+    private Long studentNumber; //학번
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -27,9 +27,27 @@ public class student {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Builder(builderMethodName = "studentJoinBuilder")
-    public student(Long studentNumber, String name, String email) {
+    @Builder
+    public student(Long id, Long studentNumber, String password, String name, String email) {
+        this.id = id;
         this.studentNumber = studentNumber;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+    }
+
+    // 학생 로그인 builder
+    @Builder(builderMethodName = "studentLoginBuilder")
+    public student(Long studentNumber, String password) {
+        this.studentNumber = studentNumber;
+        this.password = password;
+    }
+
+    // 학생 회원가입 builder
+    @Builder(builderMethodName = "studentJoinBuilder")
+    public student(Long studentNumber, String password, String name, String email) {
+        this.studentNumber = studentNumber;
+        this.password = password;
         this.name = name;
         this.email = email;
     }
