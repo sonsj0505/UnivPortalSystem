@@ -42,4 +42,11 @@ public class studentService {
 
         return studentData;
     }
+
+    public void studentEdit(Long studentNumber, student editStudentData) {
+        student userId = studentRepository.findByStudentNumber(studentNumber)
+                .orElseThrow(RuntimeException::new);
+        userId.updateStudent(editStudentData);
+        studentRepository.save(editStudentData);
+    }
 }
