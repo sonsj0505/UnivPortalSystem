@@ -7,9 +7,10 @@
 <body>
 <div>
     <div>학번 : <span th:text="*{studentNumber}"></span></div>
-    <form th:action="@{/student/edit/{pathParam}(pathParam=${studentNumber})}" th:object="${requestDtoData}" method="post">
-    <div>이름 : <input type="text" th:field="*{name}"/></div>
-    <div>이메일 : <input type="text" th:field="*{email}"/></div>
+    <form th:action="@{/student/edit/{pathParam}(pathParam=${studentNumber})}" th:object="${requestDtoData}" th:method="put">
+        <div>이름 : <input type="text" th:field="*{name}"/></div>
+        <div>이메일 : <input type="text" th:field="*{email}"/></div>
+        <input type="hidden" th:field="*{password}"/>
     <button type="submit">등록</button></br></br>
   </form>
 </div>

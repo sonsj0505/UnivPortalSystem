@@ -6,6 +6,7 @@ import sonsj.UnivPortalSystem.domain.student;
 import sonsj.UnivPortalSystem.repository.studentRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,9 +45,15 @@ public class studentService {
     }
 
     public void studentEdit(Long studentNumber, student editStudentData) {
-        student userId = studentRepository.findByStudentNumber(studentNumber)
-                .orElseThrow(RuntimeException::new);
-        userId.updateStudent(editStudentData);
-        studentRepository.save(editStudentData);
+
+        studentRepository.findByStudentNumber(studentNumber).ifPresentOrElse(
+                updateData -> {
+                    //입력한 정보를 디비에 바꾸고,
+                    updateData.updateStudent(editStudentData);
+                    //넣은 정보로 저장(update)
+                    studentRepository.save(updateData);
+                },
+                () -> new NoSuchElementException()
+        );
     }
 }

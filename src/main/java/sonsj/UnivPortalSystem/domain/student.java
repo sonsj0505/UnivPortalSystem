@@ -54,7 +54,8 @@ public class student {
 
     // 학생 정보 수정 builder
     @Builder(builderMethodName = "studentEditBuilder")
-    public student(String name, String email) {
+    public student(Long studentNumber, String name, String email) {
+        this.studentNumber = studentNumber;
         this.name = name;
         this.email = email;
     }

@@ -33,4 +33,14 @@ public class studentJoinDto {
                 .email(this.email)
                 .build();
     }
+
+    public static studentJoinDto toDto(student student){
+        return studentJoinDto.builder()
+                //value
+                .studentNumber(student.getStudentNumber())
+                .password(student.getPassword())
+                .name(student.getName())
+                .email(student.getEmail())
+                .build();
+    }
 }

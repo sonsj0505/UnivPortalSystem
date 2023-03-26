@@ -60,8 +60,10 @@ public class studentController {
 
         student studentData = studentService.studentInfo(studentNumber);
 
-        model.addAttribute("name", studentData.getName());
-        model.addAttribute("email", studentData.getEmail());
+        studentJoinDto studentDtoData = studentJoinDto.toDto(studentData);
+
+        model.addAttribute("name", studentDtoData.getName());
+        model.addAttribute("email", studentDtoData.getEmail());
 
         return "student/studentInfo";
     }
@@ -70,22 +72,17 @@ public class studentController {
     /* 학생 정보 수정 */
     @GetMapping("/student/edit/{studentNumber}")
     public String studentEdit(@PathVariable Long studentNumber,
-                              @ModelAttribute("requestDtoData") studentEditDto data,
-                              Model model) {
-
-        model.addAttribute("studentNumber", studentNumber);
-        model.addAttribute("requestDtoData", data);
+                              @ModelAttribute("requestDtoData") studentJoinDto data) {
 
         return "student/studentEdit";
     }
 
-    @PostMapping("/student/edit/{studentNumber}")
+
+    @PutMapping("/student/edit/{studentNumber}")
     public String studentEditComplete(@PathVariable Long studentNumber,
-                              @ModelAttribute("requestDtoData") studentJoinDto dtoData,
-                              Model model) {
+                              @ModelAttribute("requestDtoData") studentEditDto dtoData) {
 
-        //studentService.studentEdit(studentNumber, dtoData.toEntity());
-
+        studentService.studentEdit(studentNumber, dtoData.toEntity());
         return "redirect:/student/info/"+studentNumber;
     }
 }
