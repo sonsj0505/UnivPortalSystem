@@ -8,7 +8,13 @@ import sonsj.UnivPortalSystem.domain.student;
 import sonsj.UnivPortalSystem.dto.studenetLoginDto;
 import sonsj.UnivPortalSystem.dto.studentEditDto;
 import sonsj.UnivPortalSystem.dto.studentJoinDto;
+import sonsj.UnivPortalSystem.model.StudentStatus;
 import sonsj.UnivPortalSystem.service.studentService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -62,8 +68,12 @@ public class studentController {
 
         studentJoinDto studentDtoData = studentJoinDto.toDto(studentData);
 
+        //학생 상태 enum의 value로 받기
+        StudentStatus studentStatusValue = studentDtoData.getStudentStatus();
+
         model.addAttribute("name", studentDtoData.getName());
         model.addAttribute("email", studentDtoData.getEmail());
+        model.addAttribute("studentStatus", studentStatusValue.getDesc());
 
         return "student/studentInfo";
     }
@@ -72,7 +82,27 @@ public class studentController {
     /* 학생 정보 수정 */
     @GetMapping("/student/edit/{studentNumber}")
     public String studentEdit(@PathVariable Long studentNumber,
-                              @ModelAttribute("requestDtoData") studentJoinDto data) {
+                              @ModelAttribute("requestDtoData") studentJoinDto data, Model model) {
+
+        // 1 모든 학생 상태 리스트로 받고
+        Map<String, String> studentStatusList = new HashMap<>();
+        studentStatusList.put(StudentStatus.FRESHMAN.getValue(), StudentStatus.FRESHMAN.getDesc());
+        studentStatusList.put(StudentStatus.UNDERGRADUATE.getValue(), StudentStatus.UNDERGRADUATE.getDesc());
+        studentStatusList.put(StudentStatus.GRADUATE.getValue(), StudentStatus.GRADUATE.getDesc());
+        studentStatusList.put(StudentStatus.LEAVEOFABSENCE.getValue(), StudentStatus.LEAVEOFABSENCE.getDesc());
+
+        // 2 수정 대상 데이터 받고
+        student studentData = studentService.studentInfo(studentNumber);
+        studentJoinDto studentDtoData = studentJoinDto.toDto(studentData);
+
+        // 3 데이터 view로 넘기기
+        model.addAttribute("studentStatusList", studentStatusList);
+        model.addAttribute("name", studentDtoData.getName());
+        model.addAttribute("email", studentDtoData.getEmail());
+        model.addAttribute("studentStatus", studentDtoData.getStudentStatus());
+
+        System.out.println(studentDtoData.getStudentStatus());
+        System.out.println(studentDtoData.getName());
 
         return "student/studentEdit";
     }

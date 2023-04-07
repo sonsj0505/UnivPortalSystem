@@ -11,6 +11,8 @@
                 <div>비밀번호 : <input type="text" th:field="*{password}"/></div>
                 <div>이름 : <input type="text" th:field="*{name}"/></div>
                 <div>이메일 : <input type="text" th:field="*{email}"/></div>
+                <!--타임리프로 hidden은 어떻게 넘기는걸까?-->
+                <div><input type="hidden" id="studentStatus" name="studentStatus" value="UNDERGRADUATE"/></div>
                 <button type="submit">등록</button></br></br>
             </form>
         </div>

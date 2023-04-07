@@ -1,6 +1,7 @@
 package sonsj.UnivPortalSystem.domain;
 
 import lombok.*;
+import sonsj.UnivPortalSystem.model.StudentStatus;
 
 import javax.persistence.*;
 
@@ -27,13 +28,17 @@ public class student {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "studentStatus", nullable = false)
+    private StudentStatus studentStatus;
+
     @Builder
-    public student(Long id, Long studentNumber, String password, String name, String email) {
+    public student(Long id, Long studentNumber, String password, String name, String email, StudentStatus studentStatus) {
         this.id = id;
         this.studentNumber = studentNumber;
         this.password = password;
         this.name = name;
         this.email = email;
+        this.studentStatus = studentStatus;
     }
 
     // 학생 로그인 builder
@@ -45,23 +50,26 @@ public class student {
 
     // 학생 회원가입 builder
     @Builder(builderMethodName = "studentJoinBuilder")
-    public student(Long studentNumber, String password, String name, String email) {
+    public student(Long studentNumber, String password, String name, String email, StudentStatus studentStatus) {
         this.studentNumber = studentNumber;
         this.password = password;
         this.name = name;
         this.email = email;
+        this.studentStatus = studentStatus;
     }
 
     // 학생 정보 수정 builder
     @Builder(builderMethodName = "studentEditBuilder")
-    public student(Long studentNumber, String name, String email) {
+    public student(Long studentNumber, String name, String email, StudentStatus studentStatus) {
         this.studentNumber = studentNumber;
         this.name = name;
         this.email = email;
+        this.studentStatus = studentStatus;
     }
 
     public void updateStudent(student updateData) {
         this.name = updateData.getName();
         this.email = updateData.getEmail();
+        this.studentStatus = updateData.getStudentStatus();
     }
 }

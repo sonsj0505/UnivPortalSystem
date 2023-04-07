@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import sonsj.UnivPortalSystem.domain.student;
+import sonsj.UnivPortalSystem.model.StudentStatus;
 
 @Getter @Setter
 @RequiredArgsConstructor
@@ -15,14 +16,16 @@ public class studentJoinDto {
     private String password;
     private String name;
     private String email;
+    private StudentStatus studentStatus;
 
     @Builder
-    public studentJoinDto(Long id, Long studentNumber, String password, String name, String email) {
+    public studentJoinDto(Long id, Long studentNumber, String password, String name, String email, StudentStatus studentStatus) {
         this.id = id;
         this.studentNumber = studentNumber;
         this.password = password;
         this.name = name;
         this.email = email;
+        this.studentStatus = studentStatus;
     }
 
     public student toEntity(){
@@ -31,6 +34,7 @@ public class studentJoinDto {
                 .password(this.password)
                 .name(this.name)
                 .email(this.email)
+                .studentStatus(this.studentStatus)
                 .build();
     }
 
@@ -41,6 +45,7 @@ public class studentJoinDto {
                 .password(student.getPassword())
                 .name(student.getName())
                 .email(student.getEmail())
+                .studentStatus(student.getStudentStatus())
                 .build();
     }
 }

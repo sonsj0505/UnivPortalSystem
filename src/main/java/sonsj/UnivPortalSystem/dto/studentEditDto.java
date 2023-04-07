@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import sonsj.UnivPortalSystem.domain.student;
+import sonsj.UnivPortalSystem.model.StudentStatus;
 
 @Getter @Setter
 @RequiredArgsConstructor
@@ -12,12 +13,14 @@ public class studentEditDto {
     Long studentNumber;
     String name;
     String email;
+    StudentStatus studentStatus;
 
     @Builder
-    public studentEditDto(Long studentNumber, String name, String email) {
+    public studentEditDto(Long studentNumber, String name, String email, StudentStatus studentStatus) {
         this.studentNumber = studentNumber;
         this.name = name;
         this.email = email;
+        this.studentStatus = studentStatus;
     }
 
     public student toEntity() {
@@ -34,6 +37,7 @@ public class studentEditDto {
                 .studentNumber(student.getStudentNumber())
                 .name(student.getName())
                 .email(student.getEmail())
+                .studentStatus(student.getStudentStatus())
                 .build();
     }
 }
