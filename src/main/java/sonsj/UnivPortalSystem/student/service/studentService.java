@@ -1,18 +1,15 @@
-package sonsj.UnivPortalSystem.service;
+package sonsj.UnivPortalSystem.student.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import sonsj.UnivPortalSystem.domain.student;
-import sonsj.UnivPortalSystem.repository.studentRepository;
+import sonsj.UnivPortalSystem.student.domain.student;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class studentService {
-    private final studentRepository studentRepository;
+    private final sonsj.UnivPortalSystem.student.repository.studentRepository studentRepository;
 
     public void studentLogin(student loginData) {
 

@@ -1,19 +1,17 @@
-package sonsj.UnivPortalSystem.controller;
+package sonsj.UnivPortalSystem.student.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sonsj.UnivPortalSystem.domain.student;
-import sonsj.UnivPortalSystem.dto.studenetLoginDto;
-import sonsj.UnivPortalSystem.dto.studentEditDto;
-import sonsj.UnivPortalSystem.dto.studentJoinDto;
-import sonsj.UnivPortalSystem.model.StudentStatus;
-import sonsj.UnivPortalSystem.service.studentService;
+import sonsj.UnivPortalSystem.student.domain.student;
+import sonsj.UnivPortalSystem.student.dto.studenetLoginDto;
+import sonsj.UnivPortalSystem.student.dto.studentEditDto;
+import sonsj.UnivPortalSystem.student.dto.studentJoinDto;
+import sonsj.UnivPortalSystem.student.model.StudentStatus;
+import sonsj.UnivPortalSystem.student.service.studentService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller

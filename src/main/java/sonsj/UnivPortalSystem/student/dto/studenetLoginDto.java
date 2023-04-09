@@ -1,10 +1,10 @@
-package sonsj.UnivPortalSystem.dto;
+package sonsj.UnivPortalSystem.student.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import sonsj.UnivPortalSystem.domain.student;
+import sonsj.UnivPortalSystem.student.domain.student;
 
 @Getter @Setter
 @RequiredArgsConstructor

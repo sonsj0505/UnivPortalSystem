@@ -1,4 +1,4 @@
-package sonsj.UnivPortalSystem.model;
+package sonsj.UnivPortalSystem.student.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

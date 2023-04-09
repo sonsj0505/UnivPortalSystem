@@ -1,7 +1,7 @@
-package sonsj.UnivPortalSystem.domain;
+package sonsj.UnivPortalSystem.student.domain;
 
 import lombok.*;
-import sonsj.UnivPortalSystem.model.StudentStatus;
+import sonsj.UnivPortalSystem.student.model.StudentStatus;
 
 import javax.persistence.*;
 
@@ -31,6 +31,10 @@ public class student {
     @Enumerated(EnumType.STRING)
     @Column(name = "studentStatus", nullable = false)
     private StudentStatus studentStatus;
+
+//    @OneToMany
+//    @JoinColumn(name = "department_id")
+//    private sonsj.UnivPortalSystem.admin.domain.department department;
 
     @Builder
     public student(Long id, Long studentNumber, String password, String name, String email, StudentStatus studentStatus) {

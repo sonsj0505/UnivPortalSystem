@@ -1,8 +1,8 @@
-package sonsj.UnivPortalSystem.repository;
+package sonsj.UnivPortalSystem.student.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import sonsj.UnivPortalSystem.domain.student;
+import sonsj.UnivPortalSystem.student.domain.student;
 
 import java.util.Optional;
 
