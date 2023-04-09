@@ -7,12 +7,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum StudentStatus {
 
-    FRESHMAN("신입생", "FRESHMAN"),
-    UNDERGRADUATE("재학생", "UNDERGRADUATE"),
-    LEAVEOFABSENCE("휴학생", "LEAVEOFABSENCE"),
-    GRADUATE("졸업생", "GRADUATE"),
+    FRESHMAN("FRESHMAN", "신입생"),
+    UNDERGRADUATE("UNDERGRADUATE", "재학생"),
+    LEAVEOFABSENCE("LEAVEOFABSENCE", "휴학생"),
+    GRADUATE("GRADUATE", "졸업생"),
     ;
 
-    private final String desc;
+    private final String key;
     private final String value;
 }

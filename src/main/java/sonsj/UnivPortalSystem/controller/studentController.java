@@ -73,7 +73,7 @@ public class studentController {
 
         model.addAttribute("name", studentDtoData.getName());
         model.addAttribute("email", studentDtoData.getEmail());
-        model.addAttribute("studentStatus", studentStatusValue.getDesc());
+        model.addAttribute("studentStatus", studentStatusValue.getValue());
 
         return "student/studentInfo";
     }
@@ -86,10 +86,10 @@ public class studentController {
 
         // 1 모든 학생 상태 리스트로 받고
         Map<String, String> studentStatusList = new HashMap<>();
-        studentStatusList.put(StudentStatus.FRESHMAN.getValue(), StudentStatus.FRESHMAN.getDesc());
-        studentStatusList.put(StudentStatus.UNDERGRADUATE.getValue(), StudentStatus.UNDERGRADUATE.getDesc());
-        studentStatusList.put(StudentStatus.GRADUATE.getValue(), StudentStatus.GRADUATE.getDesc());
-        studentStatusList.put(StudentStatus.LEAVEOFABSENCE.getValue(), StudentStatus.LEAVEOFABSENCE.getDesc());
+        studentStatusList.put(StudentStatus.FRESHMAN.getKey(), StudentStatus.FRESHMAN.getValue());
+        studentStatusList.put(StudentStatus.UNDERGRADUATE.getKey(), StudentStatus.UNDERGRADUATE.getValue());
+        studentStatusList.put(StudentStatus.GRADUATE.getKey(), StudentStatus.GRADUATE.getValue());
+        studentStatusList.put(StudentStatus.LEAVEOFABSENCE.getKey(), StudentStatus.LEAVEOFABSENCE.getValue());
 
         // 2 수정 대상 데이터 받고
         student studentData = studentService.studentInfo(studentNumber);
@@ -99,10 +99,7 @@ public class studentController {
         model.addAttribute("studentStatusList", studentStatusList);
         model.addAttribute("name", studentDtoData.getName());
         model.addAttribute("email", studentDtoData.getEmail());
-        model.addAttribute("studentStatus", studentDtoData.getStudentStatus());
-
-        System.out.println(studentDtoData.getStudentStatus());
-        System.out.println(studentDtoData.getName());
+        model.addAttribute("studentStatus", studentDtoData.getStudentStatus().getKey());
 
         return "student/studentEdit";
     }
@@ -111,7 +108,6 @@ public class studentController {
     @PutMapping("/student/edit/{studentNumber}")
     public String studentEditComplete(@PathVariable Long studentNumber,
                               @ModelAttribute("requestDtoData") studentEditDto dtoData) {
-
         studentService.studentEdit(studentNumber, dtoData.toEntity());
         return "redirect:/student/info/"+studentNumber;
     }

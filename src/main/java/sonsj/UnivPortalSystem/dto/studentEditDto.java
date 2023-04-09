@@ -28,6 +28,7 @@ public class studentEditDto {
                 .studentNumber(this.studentNumber)
                 .name(this.name)
                 .email(this.email)
+                .studentStatus(this.studentStatus)
                 .build();
     }
 

@@ -8,20 +8,15 @@
 <div>
     <div>학번 : <span th:text="*{studentNumber}"></span></div>
     <form th:action="@{/student/edit/{pathParam}(pathParam=${studentNumber})}" th:object="${requestDtoData}" th:method="put">
-        <div>이름 : <input type="text" th:value="*{name}"/></div>
-        <div>이메일 : <input type="text" th:value="*{email}"/></div>
-        <div>
-            상태 :
-            <input type="text" th:value="*{studentStatus}"/>
-<!--            <select id="majorId" name="majorId" required>-->
-<!--                <option th:each="test1 : ${test}" th:value="${test}" th:text="${major.majorName}"-->
-<!--                        th:selected="${major.majorId == signUpDto.majorId}">-->
-<!--                </option>-->
-<!--            </select>-->
-            <p th:each="entry : ${studentStatusList}">
-                <span th:text="${entry.key}"></span>
-                <span th:text="${entry.value}"></span>
-            </p>
+        <div>이름 : <input type="text" id="name" name="name" th:value="${name}"/></div>
+        <div>이메일 : <input type="text" id="email" name="email" th:value="${email}"/></div>
+        <div> 상태 :
+            <select id="studentStatus" name="studentStatus">
+                <option th:each="entry : ${studentStatusList}"
+                        th:value="${entry.key}"
+                        th:text="${entry.value}"
+                        th:selected="${entry.key} == ${studentStatus}"></option>
+            </select>
         </div>
         <input type="hidden" th:field="*{password}"/>
     <button type="submit">등록</button></br></br>

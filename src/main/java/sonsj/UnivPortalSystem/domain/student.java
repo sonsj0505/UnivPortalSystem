@@ -28,6 +28,7 @@ public class student {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "studentStatus", nullable = false)
     private StudentStatus studentStatus;
 
