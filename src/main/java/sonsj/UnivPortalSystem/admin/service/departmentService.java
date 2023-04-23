@@ -5,12 +5,24 @@ import org.springframework.stereotype.Service;
 import sonsj.UnivPortalSystem.admin.domain.department;
 import sonsj.UnivPortalSystem.admin.repository.departmentRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class departmentService {
     private final departmentRepository departmentRepository;
 
     public void departmentAdd(department departmentData) {
+
+        //학과 추가
         departmentRepository.save(departmentData);
+    }
+
+    public List<department> departmentList () {
+
+        //학과 전체 조회
+        List<department> allDepartmentData = departmentRepository.findAll();
+
+        return allDepartmentData;
     }
 }

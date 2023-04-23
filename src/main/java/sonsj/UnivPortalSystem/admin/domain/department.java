@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import sonsj.UnivPortalSystem.student.model.StudentStatus;
+import sonsj.UnivPortalSystem.admin.model.DepartmentStatus;
 
 import javax.persistence.*;
 
@@ -22,10 +22,15 @@ public class department {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "departmentStatus", nullable = false)
+    private DepartmentStatus departmentStatus;
+
     @Builder
-    public department(int id, String name) {
+    public department(int id, String name, DepartmentStatus departmentStatus) {
         this.id = id;
         this.name = name;
+        this.departmentStatus = departmentStatus;
     }
 
 }

@@ -5,9 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import sonsj.UnivPortalSystem.admin.domain.department;
 import sonsj.UnivPortalSystem.admin.dto.departmentInfoDto;
 import sonsj.UnivPortalSystem.admin.service.departmentService;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,24 +19,34 @@ public class departmentController {
 
     private final departmentService departmentService;
 
-    /* 학과 추가 */
-    @GetMapping("/admin/department/add")
-    public String departmentAdd(Model model, departmentInfoDto requestDtoData){
+    /* 학과 리스트 조회 */
+    @GetMapping("/admin/department/list")
+    public String departmentList(Model model, departmentInfoDto requestDtoData){
 
         // 입력할 값을 dto로 보냄
         model.addAttribute("requestDtoData", requestDtoData);
 
-        return "admin/departmentAdd";
+        List<department> viewAllDepartmentData = departmentService.departmentList();
+
+        model.addAttribute("departmentData", viewAllDepartmentData);
+
+        return "/admin/departmentList";
     }
 
-    @PostMapping("/admin/department/add")
-    public String departmentAddComplete(@ModelAttribute("requestDtoData") departmentInfoDto data) {
+    /* 학과 추가 */
+    @PostMapping("/admin/department/list")
+    public String departmentAdd(@ModelAttribute("requestDtoData") departmentInfoDto data) {
 
         // 입력한 값을 db에 저장
         departmentService.departmentAdd(data.toEntity());
 
-        // 학과 조회
+        return "redirect:/admin/department/list";
+    }
 
-        return "redirect:/admin/department/add";
+    /* 학과 정보 조회 */
+    @GetMapping("/admin/department/info/{id}")
+    public String departmentInfo(@PathVariable("id") Integer id) {
+
+        return "/admin/departmentInfo";
     }
 }

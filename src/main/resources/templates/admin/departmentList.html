@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>departmentList</title>
+    </head>
+    <body>
+        <div>
+            <h3>학과 등록</h3>
+            <form th:action="@{/admin/department/list}" th:object="${requestDtoData}" method="post">
+                학과명 : <input type="text" th:field="*{name}"/>
+                <input type="hidden" id="departmentStatus" name="departmentStatus" value="ACTIVE"/>
+                <button type="submit">등록</button></br></br>
+            </form>
+
+            <h3>학과 리스트</h3>
+            <div>
+                <table border="1" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>no</th>
+                            <th>학과명</th>
+                            <th>상태</th>
+                            <th>학과 정보</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            <tr th:each="list : ${departmentData}">
+                                <td th:text="${list.id}"></td>
+                                <td th:text="${list.name}"></td>
+                                <td th:text="${list.departmentStatus.getValue()}"></td>
+                                <td><a th:href="@{/admin/department/info/{id}(id = ${list.id})}">자세히 보기</a></td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br><br>
+        <div>
+            <h4 style="color:red">to-do!!!</h4>
+            1. 학부 추가해서, 학부 선택하면 관련 학과 리스트 나와서, 학과 선택할 수 있게?? <br>
+            2. 학과 정보 <-- 과목, 교수진 등등 넣기 <br>
+            3. 학과 상태 클릭시, 상태 변경되게 바꾸기 ex) 활성 버튼 클릭 -> 비활성 하시겠습니까? 얼랏 -> ok 선택시 비활성으로 변경됨 (비활성도 동일하게)
+        </div>
+    </body>
+</html>
