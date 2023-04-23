@@ -6,5 +6,52 @@
 </head>
 <body>
   <h3>학과 정보</h3>
+  <div>
+    <table border="1" style="text-align:center">
+      <thead>
+      <tr>
+        <th>no</th>
+        <th>학과명</th>
+        <th>상태</th>
+        <th>과목 추가</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td th:text="${departmentInfoData.id}"></td>
+        <td th:text="${departmentInfoData.name}"></td>
+        <td th:text="${departmentInfoData.departmentStatus.getValue()}"></td>
+        <td><a th:href="@{/admin/department/{id}/subject/add (id = ${departmentInfoData.id})}">추가</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>과목 리스트</h3>
+  <h4 style="color:red">다른 학과의 과목까지 모두 조회됨 (수정예정)</h4>
+  <div>
+    <table border="1" style="text-align:center">
+      <thead>
+        <tr>
+          <th>no</th>
+          <th>과목명</th>
+          <th>이수구분</th>
+          <th>학점</th>
+          <th>담당 교수</th>
+          <th>상태</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="list : ${subjectData}">
+          <td th:text="${list.id}"></td>
+          <td th:text="${list.subjectName}"></td>
+          <td th:text="${list.subjectType.getValue()}"></td>
+          <td th:text="${list.courseCredit}"></td>
+          <td>담당교수 추가 예정</td>
+          <td th:text="${list.subjectStatus.getValue()}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>

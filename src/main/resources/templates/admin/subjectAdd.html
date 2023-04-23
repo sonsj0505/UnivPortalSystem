@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>subjectAdd</title>
+</head>
+<body>
+    <h3>과목 추가</h3>
+    <div>
+        <form th:action='@{/admin/department/{pathParam}/subject/add (pathParam = ${departmentId})}'
+              th:object='${requestDtoData}' method="post">
+            과목명 : <input type="text" id="subjectName" name="subjectName"><br>
+            이수구분 :
+            <select id="subjectType" name="subjectType">
+                <option th:each="entry : ${subjectTypeList}"
+                        th:value="${entry.key}"
+                        th:text="${entry.value}"></option>
+            </select><br>
+            학점 : <input type="text" id="courseCredit" name="courseCredit"><br>
+            담당교수 :<br>
+            <input type="hidden" id="subjectStatus" name="subjectStatus" value="ACTIVE">
+            <input type="hidden" id="departmentId" name="departmentId" th:value=${departmentId}>
+            <button type="submit">등록</button>
+        </form>
+    </div>
+</body>
+</html>

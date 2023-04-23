@@ -18,11 +18,17 @@ public class departmentService {
         departmentRepository.save(departmentData);
     }
 
-    public List<department> departmentList () {
+    public List<department> departmentListAllRead() {
 
         //학과 전체 조회
         List<department> allDepartmentData = departmentRepository.findAll();
 
         return allDepartmentData;
+    }
+
+    public department departmentInfo(int id) {
+        department departmentInfoData = departmentRepository.findById(id).get();
+
+        return departmentInfoData;
     }
 }

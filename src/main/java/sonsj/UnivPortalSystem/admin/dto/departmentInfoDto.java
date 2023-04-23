@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import sonsj.UnivPortalSystem.admin.domain.department;
 import sonsj.UnivPortalSystem.admin.model.DepartmentStatus;
+import sonsj.UnivPortalSystem.student.domain.student;
+import sonsj.UnivPortalSystem.student.dto.studentJoinDto;
 
 @Getter @Setter
 @RequiredArgsConstructor
@@ -27,6 +29,14 @@ public class departmentInfoDto {
                 .id(this.id)
                 .name(this.name)
                 .departmentStatus(this.departmentStatus)
+                .build();
+    }
+
+    public static departmentInfoDto toDto(department department){
+        return departmentInfoDto.builder()
+                .id(department.getId())
+                .name(department.getName())
+                .departmentStatus(department.getDepartmentStatus())
                 .build();
     }
 }
