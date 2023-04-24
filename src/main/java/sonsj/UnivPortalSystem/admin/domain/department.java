@@ -7,6 +7,7 @@ import lombok.Setter;
 import sonsj.UnivPortalSystem.admin.model.DepartmentStatus;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -25,6 +26,9 @@ public class department {
     @Enumerated(EnumType.STRING)
     @Column(name = "departmentStatus", nullable = false)
     private DepartmentStatus departmentStatus;
+
+    @OneToMany(mappedBy = "department")
+    private List<subject> subject;
 
     @Builder
     public department(int id, String name, DepartmentStatus departmentStatus) {

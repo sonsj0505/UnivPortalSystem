@@ -14,13 +14,13 @@ public class subjectService {
 
     public void subjectAdd(subject subjectData) {
 
-        subject a = subjectRepository.save(subjectData);
+        subjectRepository.save(subjectData);
     }
 
     public List<subject> subjectListAllRead(Integer id) {
 
         //학과별 과목 전체 조회
-        List<subject> allSubjectData = subjectRepository.findAll();
+        List<subject> allSubjectData = subjectRepository.findByDepartmentId(id);
 
         return allSubjectData;
     }

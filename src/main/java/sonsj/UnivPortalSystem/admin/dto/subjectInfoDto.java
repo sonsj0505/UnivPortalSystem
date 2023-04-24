@@ -18,16 +18,16 @@ public class subjectInfoDto {
     private SubjectType subjectType;
     private String courseCredit;
     private SubjectStatus subjectStatus;
-    private department departmentId;
+    private department department;
 
     @Builder
-    public subjectInfoDto(Integer id, String subjectName, SubjectType subjectType, String courseCredit, SubjectStatus subjectStatus, department departmentId) {
+    public subjectInfoDto(Integer id, String subjectName, SubjectType subjectType, String courseCredit, SubjectStatus subjectStatus, department department) {
         this.id = id;
         this.subjectName = subjectName;
         this.subjectType = subjectType;
         this.courseCredit = courseCredit;
         this.subjectStatus = subjectStatus;
-        this.departmentId = departmentId;
+        this.department = department;
     }
 
     public subject toEntity() {
@@ -37,7 +37,7 @@ public class subjectInfoDto {
                 .subjectType(this.subjectType)
                 .courseCredit(this.courseCredit)
                 .subjectStatus(this.subjectStatus)
-                .departmentId(this.departmentId)
+                .department(this.department)
                 .build();
     }
 }

@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import sonsj.UnivPortalSystem.admin.model.DepartmentStatus;
 import sonsj.UnivPortalSystem.admin.model.SubjectStatus;
 import sonsj.UnivPortalSystem.admin.model.SubjectType;
 
@@ -37,16 +36,16 @@ public class subject {
     //교수
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
-    private department departmentId;
+    @JoinColumn(name = "department")
+    private department department;
 
     @Builder
-    public subject(Integer id, String subjectName, SubjectType subjectType, String courseCredit, SubjectStatus subjectStatus, department departmentId) {
+    public subject(Integer id, String subjectName, SubjectType subjectType, String courseCredit, SubjectStatus subjectStatus, department department) {
         this.id = id;
         this.subjectName = subjectName;
         this.subjectType = subjectType;
         this.courseCredit = courseCredit;
         this.subjectStatus = subjectStatus;
-        this.departmentId = departmentId;
+        this.department = department;
     }
 }
