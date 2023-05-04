@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import sonsj.UnivPortalSystem.admin.domain.department;
+import sonsj.UnivPortalSystem.admin.service.departmentService;
 import sonsj.UnivPortalSystem.student.domain.student;
 import sonsj.UnivPortalSystem.student.dto.studenetLoginDto;
 import sonsj.UnivPortalSystem.student.dto.studentEditDto;
@@ -12,6 +14,7 @@ import sonsj.UnivPortalSystem.student.model.StudentStatus;
 import sonsj.UnivPortalSystem.student.service.studentService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -19,6 +22,7 @@ import java.util.Map;
 public class studentController {
 
     private final studentService studentService;
+    private final departmentService departmentService;
 
     /* 로그인 */
     @GetMapping("/student/login")
@@ -44,6 +48,10 @@ public class studentController {
     @GetMapping("/student/join")
     public String studentJoin(Model model, studentJoinDto requestDtoData){
 
+        //학과 정보 가져오기
+        List<department> departmentList = departmentService.departmentListAllRead();
+        model.addAttribute("departmentList", departmentList);
+
         // 입력할 값을 dto로 보냄
         model.addAttribute("requestDtoData", requestDtoData);
         return "student/studentJoin";
@@ -62,8 +70,8 @@ public class studentController {
     @GetMapping("/student/info/{studentNumber}")
     public String studentInfo(@PathVariable Long studentNumber, Model model) {
 
+        //학생 데이터 조회
         student studentData = studentService.studentInfo(studentNumber);
-
         studentJoinDto studentDtoData = studentJoinDto.toDto(studentData);
 
         //학생 상태 enum의 value로 받기
@@ -72,6 +80,7 @@ public class studentController {
         model.addAttribute("name", studentDtoData.getName());
         model.addAttribute("email", studentDtoData.getEmail());
         model.addAttribute("studentStatus", studentStatusValue.getValue());
+        model.addAttribute("department", studentDtoData.getDepartment().getName());
 
         return "student/studentInfo";
     }

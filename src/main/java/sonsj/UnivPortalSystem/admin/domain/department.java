@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import sonsj.UnivPortalSystem.admin.model.DepartmentStatus;
+import sonsj.UnivPortalSystem.student.domain.student;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,6 +30,9 @@ public class department {
 
     @OneToMany(mappedBy = "department")
     private List<subject> subject;
+
+    @OneToMany(mappedBy = "department")
+    private List<student> student;
 
     @Builder
     public department(int id, String name, DepartmentStatus departmentStatus) {

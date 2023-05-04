@@ -2,8 +2,11 @@ package sonsj.UnivPortalSystem.student.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import sonsj.UnivPortalSystem.admin.domain.subject;
 import sonsj.UnivPortalSystem.student.domain.student;
+import sonsj.UnivPortalSystem.student.repository.studentRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -52,5 +55,13 @@ public class studentService {
                 },
                 () -> new NoSuchElementException()
         );
+    }
+
+    public List<student> studentListAllRead(Integer id) {
+
+        //학과별 학생 전체 조회
+        List<student> allStudentData = studentRepository.findByDepartmentId(id);
+
+        return allStudentData;
     }
 }

@@ -28,7 +28,6 @@
   </div>
 
   <h3>과목 리스트</h3>
-  <h4 style="color:red">다른 학과의 과목까지 모두 조회됨 (수정예정)</h4>
   <div>
     <table border="1" style="text-align:center">
       <thead>
@@ -42,14 +41,36 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="list : ${subjectData}">
-          <td th:text="${list.id}"></td>
-          <td th:text="${list.subjectName}"></td>
-          <td th:text="${list.subjectType.getValue()}"></td>
-          <td th:text="${list.courseCredit}"></td>
+        <tr th:each="subjectList : ${subjectData}">
+          <td th:text="${subjectList.id}"></td>
+          <td th:text="${subjectList.subjectName}"></td>
+          <td th:text="${subjectList.subjectType.getValue()}"></td>
+          <td th:text="${subjectList.courseCredit}"></td>
           <td>담당교수 추가 예정</td>
-          <td th:text="${list.subjectStatus.getValue()}"></td>
+          <td th:text="${subjectList.subjectStatus.getValue()}"></td>
         </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>학생 리스트</h3>
+  <div>
+    <table border="1" style="text-align:center">
+      <thead>
+      <tr>
+        <th>no</th>
+        <th>학번</th>
+        <th>학생명</th>
+        <th>이메일</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="studentList : ${studentData}">
+        <td th:text="${studentList.id}"></td>
+        <td th:text="${studentList.studentNumber}"></td>
+        <td th:text="${studentList.name}"></td>
+        <td th:text="${studentList.email}"></td>
+      </tr>
       </tbody>
     </table>
   </div>

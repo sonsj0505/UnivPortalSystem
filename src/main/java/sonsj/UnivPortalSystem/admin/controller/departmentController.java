@@ -14,6 +14,8 @@ import sonsj.UnivPortalSystem.admin.dto.subjectInfoDto;
 import sonsj.UnivPortalSystem.admin.model.SubjectType;
 import sonsj.UnivPortalSystem.admin.service.departmentService;
 import sonsj.UnivPortalSystem.admin.service.subjectService;
+import sonsj.UnivPortalSystem.student.domain.student;
+import sonsj.UnivPortalSystem.student.service.studentService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +27,7 @@ public class departmentController {
 
     private final departmentService departmentService;
     private final subjectService subjectService;
+    private final studentService studentService;
 
     /* 학과 리스트 조회 */
     @GetMapping("/admin/department/list")
@@ -62,6 +65,10 @@ public class departmentController {
         //과목 정보
         List<subject> viewAllSubjectData = subjectService.subjectListAllRead(id);
         model.addAttribute("subjectData", viewAllSubjectData);
+
+        //학생 정보
+        List<student> viewAllStudentData = studentService.studentListAllRead(id);
+        model.addAttribute("studentData", viewAllStudentData);
 
         return "/admin/departmentInfo";
     }
