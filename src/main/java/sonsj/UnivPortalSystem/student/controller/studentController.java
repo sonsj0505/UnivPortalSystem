@@ -107,6 +107,7 @@ public class studentController {
         model.addAttribute("name", studentDtoData.getName());
         model.addAttribute("email", studentDtoData.getEmail());
         model.addAttribute("studentStatus", studentDtoData.getStudentStatus().getKey());
+        model.addAttribute("departmentName", studentData.getDepartment().getName());
 
         return "student/studentEdit";
     }

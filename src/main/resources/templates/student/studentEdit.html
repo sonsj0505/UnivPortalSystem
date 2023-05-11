@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <div>학번 : <span th:text="*{studentNumber}"></span></div>
+    <div>학번 : <span th:text="*{studentNumber}" /></div>
     <form th:action="@{/student/edit/{pathParam}(pathParam=${studentNumber})}" th:object="${requestDtoData}" th:method="put">
         <div>이름 : <input type="text" id="name" name="name" th:value="${name}"/></div>
         <div>이메일 : <input type="text" id="email" name="email" th:value="${email}"/></div>
@@ -18,9 +18,7 @@
                         th:selected="${entry.key} == ${studentStatus}"></option>
             </select>
         </div>
-        <div>
-            학과 정보
-        </div>
+        <div>학과 정보 : <span th:text="${departmentName}" id="departmentName" name="departmentName" /></div>
         <input type="hidden" th:field="*{password}"/>
     <button type="submit">등록</button></br></br>
   </form>
