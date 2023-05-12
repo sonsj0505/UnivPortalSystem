@@ -84,7 +84,7 @@ public class departmentController {
         Map<String, String> subjectTypeList = new HashMap<>();
         subjectTypeList.put(SubjectType.MAJOR_REQUIRED.getKey(), SubjectType.MAJOR_REQUIRED.getValue());
         subjectTypeList.put(SubjectType.MAJOR_OPTION.getKey(), SubjectType.MAJOR_OPTION.getValue());
-        subjectTypeList.put(SubjectType.ELECTIVE_REQUIRED.getKey(), SubjectType.ELECTIVE_OPTION.getValue());
+        subjectTypeList.put(SubjectType.ELECTIVE_REQUIRED.getKey(), SubjectType.ELECTIVE_REQUIRED.getValue());
         subjectTypeList.put(SubjectType.ELECTIVE_OPTION.getKey(), SubjectType.ELECTIVE_OPTION.getValue());
         model.addAttribute("subjectTypeList", subjectTypeList);
 

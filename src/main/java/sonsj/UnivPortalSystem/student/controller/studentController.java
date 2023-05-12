@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sonsj.UnivPortalSystem.admin.domain.department;
+import sonsj.UnivPortalSystem.admin.domain.subject;
 import sonsj.UnivPortalSystem.admin.service.departmentService;
 import sonsj.UnivPortalSystem.student.domain.student;
 import sonsj.UnivPortalSystem.student.dto.studenetLoginDto;
@@ -112,11 +113,30 @@ public class studentController {
         return "student/studentEdit";
     }
 
-
     @PutMapping("/student/edit/{studentNumber}")
     public String studentEditComplete(@PathVariable Long studentNumber,
                               @ModelAttribute("requestDtoData") studentEditDto dtoData) {
         studentService.studentEdit(studentNumber, dtoData.toEntity());
         return "redirect:/student/info/"+studentNumber;
+    }
+
+    /* 수강 신청 */
+    @GetMapping("/student/{studentNumber}/registCourse")
+    public String studentRegistCourse(@PathVariable Long studentNumber, Model model) {
+
+        //학생 데이터 조회
+        student studentData = studentService.studentInfo(studentNumber);
+        studentJoinDto studentDtoData = studentJoinDto.toDto(studentData);
+        model.addAttribute("subjectList", studentDtoData.getDepartment().getSubject());
+
+        return "student/studentRegistCourse";
+    }
+
+    @PostMapping("/student/{studentNumber}/registCourse")
+    public String studentRegistCourseComplete(@ModelAttribute("requestDtoData") studenetLoginDto dtoData, Model model) {
+
+        student studentData = dtoData.toEntity();
+
+        return "redirect:/student/info/"+studentData.getStudentNumber();
     }
 }
