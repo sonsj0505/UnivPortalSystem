@@ -6,8 +6,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import sonsj.UnivPortalSystem.admin.model.SubjectStatus;
 import sonsj.UnivPortalSystem.admin.model.SubjectType;
+import sonsj.UnivPortalSystem.student.domain.student;
+import sonsj.UnivPortalSystem.student.domain.subjectRegistration;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -39,13 +42,19 @@ public class subject {
     @JoinColumn(name = "department")
     private department department;
 
+    @OneToMany(mappedBy = "subjectId")
+    private List<subjectRegistration> subjectRegistration;
+
     @Builder
-    public subject(Integer id, String subjectName, SubjectType subjectType, String courseCredit, SubjectStatus subjectStatus, department department) {
+    public subject(Integer id, String subjectName, SubjectType subjectType,
+                   String courseCredit, SubjectStatus subjectStatus,
+                   department department, List<subjectRegistration> subjectRegistration) {
         this.id = id;
         this.subjectName = subjectName;
         this.subjectType = subjectType;
         this.courseCredit = courseCredit;
         this.subjectStatus = subjectStatus;
         this.department = department;
+        this.subjectRegistration = subjectRegistration;
     }
 }

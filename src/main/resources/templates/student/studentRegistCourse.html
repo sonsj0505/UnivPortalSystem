@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>studentRegistCourse</title>
 </head>
 <body>
@@ -26,16 +26,20 @@
                 <td th:text="${list.subjectType.getValue()}"></td>
                 <td th:text="${list.courseCredit}"></td>
                 <td>담당 교수명</td>
-                <td><input type="checkbox" class="form-check-input"></td>
+                <td class="form-check form-check-inline">
+                    <input type="hidden" id="studentId" name="studentId" th:value="${studentId}"/>
+                    <input type="checkbox" th:field="*{subjectId}" th:value="${list.id}" class="form-check-input">
+                    <label th:for="${#ids.prev('subjectId')}" class="form-check-label"></label>
+                </td>
             </tr>
             </tbody>
         </table><br>
         <button type="submit">신청하기</button>
     </form>
-
-    <h4>
-        to-do : 수강 신청 처리 추가
-    </h4>
 </div>
+
+<h4>
+    to-do : 멀티 체크박스 적용
+</h4>
 </body>
 </html>

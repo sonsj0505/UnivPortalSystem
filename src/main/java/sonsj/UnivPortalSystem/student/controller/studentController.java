@@ -8,15 +8,20 @@ import sonsj.UnivPortalSystem.admin.domain.department;
 import sonsj.UnivPortalSystem.admin.domain.subject;
 import sonsj.UnivPortalSystem.admin.service.departmentService;
 import sonsj.UnivPortalSystem.student.domain.student;
+import sonsj.UnivPortalSystem.student.domain.subjectRegistration;
 import sonsj.UnivPortalSystem.student.dto.studenetLoginDto;
 import sonsj.UnivPortalSystem.student.dto.studentEditDto;
 import sonsj.UnivPortalSystem.student.dto.studentJoinDto;
+import sonsj.UnivPortalSystem.student.dto.subjectRegistDto;
+import sonsj.UnivPortalSystem.student.model.ListWrapper;
 import sonsj.UnivPortalSystem.student.model.StudentStatus;
 import sonsj.UnivPortalSystem.student.service.studentService;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -122,21 +127,23 @@ public class studentController {
 
     /* 수강 신청 */
     @GetMapping("/student/{studentNumber}/registCourse")
-    public String studentRegistCourse(@PathVariable Long studentNumber, Model model) {
+    public String studentRegistCourse(@PathVariable Long studentNumber, subjectRegistDto requestDtoData, Model model) {
 
         //학생 데이터 조회
         student studentData = studentService.studentInfo(studentNumber);
         studentJoinDto studentDtoData = studentJoinDto.toDto(studentData);
         model.addAttribute("subjectList", studentDtoData.getDepartment().getSubject());
+        model.addAttribute("studentId", studentData.getId());
+
+        // 입력할 값을 dto로 보냄
+        model.addAttribute("requestDtoData", requestDtoData);
 
         return "student/studentRegistCourse";
     }
 
     @PostMapping("/student/{studentNumber}/registCourse")
-    public String studentRegistCourseComplete(@ModelAttribute("requestDtoData") studenetLoginDto dtoData, Model model) {
+    public String studentRegistCourseComplete(@ModelAttribute("requestDtoData") ListWrapper<subjectRegistDto> dtoData, Model model) {
 
-        student studentData = dtoData.toEntity();
-
-        return "redirect:/student/info/"+studentData.getStudentNumber();
+       return "redirect:/student/info/{studentNumber}";
     }
 }

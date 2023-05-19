@@ -2,9 +2,11 @@ package sonsj.UnivPortalSystem.student.domain;
 
 import lombok.*;
 import sonsj.UnivPortalSystem.admin.domain.department;
+import sonsj.UnivPortalSystem.admin.domain.subject;
 import sonsj.UnivPortalSystem.student.model.StudentStatus;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity // jpa로 관리되는 entity 객체
 @Table(name = "student", uniqueConstraints = @UniqueConstraint(columnNames = "studentNumber")) // db 테이블 정보 구성
@@ -37,8 +39,15 @@ public class student {
     @JoinColumn(name = "department")
     private department department;
 
+    @OneToMany(mappedBy = "studentId")
+    private List<subjectRegistration> subjectRegistration;
+
+
+
     @Builder
-    public student(Long id, Long studentNumber, String password, String name, String email, StudentStatus studentStatus, department department) {
+    public student(Long id, Long studentNumber, String password, String name, String email,
+                   StudentStatus studentStatus,
+                   department department, List<subjectRegistration> subjectRegistration) {
         this.id = id;
         this.studentNumber = studentNumber;
         this.password = password;
@@ -46,6 +55,7 @@ public class student {
         this.email = email;
         this.studentStatus = studentStatus;
         this.department = department;
+        this.subjectRegistration = subjectRegistration;
     }
 
     // 학생 로그인 builder
